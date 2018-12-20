@@ -21,6 +21,7 @@
             <div class="navbar-nav">
                 <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
                 <a class="nav-item nav-link" href="#">About Us</a>
+                <a class="nav-item nav-link" href="#">How it Works</a>
                 <a class="nav-item nav-link" href="#">Create Plan</a>
             </div>
         </div>
@@ -38,7 +39,7 @@
             <div class="form-group row justify-content-end mx-auto" style="max-width: 380px;">
                 <label for="tdeeInput" class="col-sm-4 col-form-label p-0 pt-1">Daily Calories</label>
                 <div class="col-sm-8">
-                    <form action="#" onsubmit="calcMacros()">
+                    <form onsubmit="calcMacros()">
                         <input type="number" class="form-control" id="tdeeInput" placeholder="Enter tdee...">
                         <small>Don't know your tdee? Click <a href="#tdeeCalculator" data-toggle="modal" data-target="#tdeeCalculator">here</a>!</small>
                     </form>
@@ -47,8 +48,8 @@
         </div> <!-- End Tdee Input  -->
 
         <!-- Begin Macro Results Table -->
-        <div class="text-center mt-5" id="macroResultsTable" style="display: none;">
-            <h4>Results</h4>
+        <div class="text-center mt-4" id="macroResultsTable" style="display: none;">
+            <h4>Macro Results</h4>
             <table class="mx-auto">
                 <tr>
                     <th>Calories</th>
@@ -76,11 +77,11 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form>
+                        <form onsubmit="calcTdee()">
                             <label for="unitTypes">Unit Type</label>
                             <div id="unitTypes">
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="unitImperial" value="1">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="unitImperial" value="1" checked>
                                     <label class="form-check-label" for="unitImperial">Imperial</label>
                                 </div>
                                 <div class="form-check form-check-inline">
@@ -91,11 +92,11 @@
                             <label class="mt-4" for="genders">Gender</label>
                             <div id="genders">
                                 <div class="form-check form-check-inline" id="genders">
-                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="sexMale" value="1">
+                                    <input class="gender form-check-input" type="radio" name="genderOptions" id="sexMale" value="male">
                                     <label class="form-check-label" for="sexMale">Male</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="sexFemale" value="2">
+                                    <input class="gender form-check-input" type="radio" name="genderOptions" id="sexFemale" value="female">
                                     <label class="form-check-label" for="sexFemale">Female</label>
                                 </div>
                             </div>
@@ -106,32 +107,32 @@
                                 </div>
                                 <div class="form-group col-md-3 pl-2">
                                     <label for="weight">Weight</label>
-                                    <input type="number" class="form-control" id="weight">
+                                    <input type="number" class="form-control" id="weight" placeholder="lbs">
                                 </div>
                                 <div class="form-group col-md-6 pl-2">
                                    <label for="height">Height</label>
                                    <div class="row">
                                        <div class="right-padding form-group col-md-6">
-                                           <input type="number" class="form-control" id="height">
+                                           <input type="number" class="form-control" id="height" placeholder="feet">
                                        </div>
                                        <div class="left-padding form-group col-md-6 ">
-                                           <input type="number" class="form-control" id="height2">
+                                           <input type="number" class="form-control" id="height2" placeholder="inches">
                                        </div>
                                    </div>
                                </div>
                                <div class="form-row w-100 pl-2">
                                    <label for="activityLevelSelect">Activity Level</label>
                                    <select class="form-control" id="activityLevelSelect">
-                                       <option>Sedentary (workout 0 times per week)</option>
-                                       <option>Lightly Active (workout 1-2 times per week)</option>
-                                       <option>Moderately Active (workout 3-4 times per week)</option>
-                                       <option>Very Active (workout 5+ times per week)</option>
-                                       <option>Extremely Active (intense workouts 5+ times per week)</option>
+                                       <option value="0">Sedentary (workout 0 times per week)</option>
+                                       <option value="1">Lightly Active (workout 1-2 times per week)</option>
+                                       <option value="2">Moderately Active (workout 3-4 times per week)</option>
+                                       <option value="3">Very Active (workout 5+ times per week)</option>
+                                       <option value="4">Extremely Active (intense workouts 5+ times per week)</option>
                                    </select>
                                </div>
                            </div>
                            <div class="modal-footer">
-                               <button type="submit" class="btn btn-success">Calculate!</button>
+                               <button type="submit" class="btn btn-success" id="calculateTdeeBtn">Calculate!</button>
                            </div>
                        </form>
                     </div>
