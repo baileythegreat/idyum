@@ -6,16 +6,167 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Links Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <!-- Links custom css stylesheet -->
-    <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
+    <!--  Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Idyum</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="#">About Us</a>
+                <a class="nav-item nav-link" href="#">Create Plan</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header class="mt-5">
+            <h2 class="text-center">Welcome to Idyum! Your ultimate diet planning tool.</h2>
+            <p class="text-center">Calculate calories and macros, create a meal plan, and shop for healthy foods below</p>
+        </header>
+
+        <!-- Tdee Input  -->
+        <div class="text-center mt-5">
+            <h4>Calculate macros</h4>
+            <div class="form-group row justify-content-end mx-auto" style="max-width: 380px;">
+                <label for="tdeeInput" class="col-sm-4 col-form-label p-0 pt-1">Daily Calories</label>
+                <div class="col-sm-8">
+                    <form action="#" onsubmit="calcMacros()">
+                        <input type="number" class="form-control" id="tdeeInput" placeholder="Enter tdee...">
+                        <small>Don't know your tdee? Click <a href="#tdeeCalculator" data-toggle="modal" data-target="#tdeeCalculator">here</a>!</small>
+                    </form>
+                </div>
+            </div>
+        </div> <!-- End Tdee Input  -->
+
+        <!-- Begin Macro Results Table -->
+        <div class="text-center mt-5" id="macroResultsTable" style="display: none;">
+            <h4>Results</h4>
+            <table class="mx-auto">
+                <tr>
+                    <th>Calories</th>
+                    <th>Protein</th>
+                    <th>Carbohydrates</th>
+                    <th>Fat</th>
+                </tr>
+                <tr id="macroResults">
+                    <td id="caloriesMacro"></td>
+                    <td id="proteinMacro"></td>
+                    <td id="carbsMacro"></td>
+                    <td id="fatMacro"></td>
+                </tr>
+            </table>
+        </div>  <!-- End Macro Results Table  -->
+
+        <!-- Calorie/Macro calculator modal form -->
+        <div class="modal fade" id="tdeeCalculator" tabindex="-1" role="dialog" aria-labelledby="tdeeCalculator" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Background Info</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <label for="unitTypes">Unit Type</label>
+                            <div id="unitTypes">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="unitImperial" value="1">
+                                    <label class="form-check-label" for="unitImperial">Imperial</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="unitMetric" value="2">
+                                    <label class="form-check-label" for="unitMetric">Metric</label>
+                                </div>
+                            </div>
+                            <label class="mt-4" for="genders">Gender</label>
+                            <div id="genders">
+                                <div class="form-check form-check-inline" id="genders">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="sexMale" value="1">
+                                    <label class="form-check-label" for="sexMale">Male</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="sexFemale" value="2">
+                                    <label class="form-check-label" for="sexFemale">Female</label>
+                                </div>
+                            </div>
+                            <div class="form-row mt-4">
+                                <div class="form-group col-md-3">
+                                    <label for="age">Age</label>
+                                    <input type="number" class="form-control" id="age">
+                                </div>
+                                <div class="form-group col-md-3 pl-2">
+                                    <label for="weight">Weight</label>
+                                    <input type="number" class="form-control" id="weight">
+                                </div>
+                                <div class="form-group col-md-6 pl-2">
+                                   <label for="height">Height</label>
+                                   <div class="row">
+                                       <div class="right-padding form-group col-md-6">
+                                           <input type="number" class="form-control" id="height">
+                                       </div>
+                                       <div class="left-padding form-group col-md-6 ">
+                                           <input type="number" class="form-control" id="height2">
+                                       </div>
+                                   </div>
+                               </div>
+                               <div class="form-row w-100 pl-2">
+                                   <label for="activityLevelSelect">Activity Level</label>
+                                   <select class="form-control" id="activityLevelSelect">
+                                       <option>Sedentary (workout 0 times per week)</option>
+                                       <option>Lightly Active (workout 1-2 times per week)</option>
+                                       <option>Moderately Active (workout 3-4 times per week)</option>
+                                       <option>Very Active (workout 5+ times per week)</option>
+                                       <option>Extremely Active (intense workouts 5+ times per week)</option>
+                                   </select>
+                               </div>
+                           </div>
+                           <div class="modal-footer">
+                               <button type="submit" class="btn btn-success">Calculate!</button>
+                           </div>
+                       </form>
+                    </div>
+                </div>
+            </div>
+        </div>  <!-- End calorie calculator -->
+
+        <!-- Diet/Macro Restrictions -->
+        <div class="text-center mt-5">
+            <h4>Choose Diet Type</h4>
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-light btn-group-lg">Anything</button>
+                <button type="button" class="btn btn-light btn-group-lg">Vegan</button>
+                <button type="button" class="btn btn-light btn-group-lg">Keto</button>
+                <button type="button" class="btn btn-light btn-group-lg">Paleo</button>
+                <button type="button" class="btn btn-light btn-group-lg">Vegetarian</button>
+            </div>
+            <div class="form-group mt-5">
+                <h5>Select Food Allergies</h5>
+                <select multiple class="form-control mx-auto w-100" id="foodAllergies" style="max-width: 380px;">
+                    <option>Gluten</option>
+                    <option>Dairy</option>
+                    <option>Nuts</option>
+                    <option>Fish</option>
+                    <option>Soy</option>
+                </select>
+            </div>
+        </div>  <!-- End of Diet/Macro Restrictions -->
+
+    </div>
 
     <!-- Links to Jquery and Popper (Bootstrap support)  -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <!--  Links to JS files -->
     <script src="app.js"></script>
 </body>
