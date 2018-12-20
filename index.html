@@ -6,11 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Links Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <!-- Ubuntu font -->
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
     <!-- Links custom css stylesheet -->
     <link rel="stylesheet" href="styles.css">
 </head>
 
-<body>
+<body style="font-family: 'Ubuntu', sans-serif;">
     <!--  Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">Idyum</a>
@@ -46,25 +48,6 @@
                 </div>
             </div>
         </div> <!-- End Tdee Input  -->
-
-        <!-- Begin Macro Results Table -->
-        <div class="text-center mt-4" id="macroResultsTable" style="display: none;">
-            <h4>Macro Results</h4>
-            <table class="mx-auto">
-                <tr>
-                    <th>Calories</th>
-                    <th>Protein</th>
-                    <th>Carbohydrates</th>
-                    <th>Fat</th>
-                </tr>
-                <tr id="macroResults">
-                    <td id="caloriesMacro"></td>
-                    <td id="proteinMacro"></td>
-                    <td id="carbsMacro"></td>
-                    <td id="fatMacro"></td>
-                </tr>
-            </table>
-        </div>  <!-- End Macro Results Table  -->
 
         <!-- Calorie/Macro calculator modal form -->
         <div class="modal fade" id="tdeeCalculator" tabindex="-1" role="dialog" aria-labelledby="tdeeCalculator" aria-hidden="true">
@@ -141,26 +124,53 @@
         </div>  <!-- End calorie calculator -->
 
         <!-- Diet/Macro Restrictions -->
-        <div class="text-center mt-5">
+        <div class="text-center mt-4">
             <h4>Choose Diet Type</h4>
-            <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-light btn-group-lg">Anything</button>
-                <button type="button" class="btn btn-light btn-group-lg">Vegan</button>
-                <button type="button" class="btn btn-light btn-group-lg">Keto</button>
-                <button type="button" class="btn btn-light btn-group-lg">Paleo</button>
-                <button type="button" class="btn btn-light btn-group-lg">Vegetarian</button>
-            </div>
-            <div class="form-group mt-5">
-                <h5>Select Food Allergies</h5>
-                <select multiple class="form-control mx-auto w-100" id="foodAllergies" style="max-width: 380px;">
-                    <option>Gluten</option>
-                    <option>Dairy</option>
-                    <option>Nuts</option>
-                    <option>Fish</option>
-                    <option>Soy</option>
-                </select>
+            <div class="btn-group" role="group" aria-label="Basic example" id="dietTypes">
+                <button type="button" class="btn btn-light btn-group-lg" id="anythingBtn">Anything</button>
+                <button type="button" class="btn btn-light btn-group-lg" id="veganBtn">Vegan</button>
+                <button type="button" class="btn btn-light btn-group-lg" id="ketoBtn">Keto</button>
+                <button type="button" class="btn btn-light btn-group-lg" id="paleoBtn">Paleo</button>
+                <button type="button" class="btn btn-light btn-group-lg" id="vegetarianBtn">Vegetarian</button>
             </div>
         </div>  <!-- End of Diet/Macro Restrictions -->
+
+        <!-- Begin Macro Results Table -->
+        <div class="text-center mt-5" id="macroResultsTable" style="display: none;">
+            <h4>Macro Results</h4>
+            <table class="mx-auto">
+                <tr>
+                    <th>Calories</th>
+                    <th>Protein</th>
+                    <th>Carbohydrates</th>
+                    <th>Fat</th>
+                </tr>
+                <tr id="macroResults">
+                    <td id="caloriesMacro"></td>
+                    <td id="proteinMacro"></td>
+                    <td id="carbsMacro"></td>
+                    <td id="fatMacro"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td id="proteinMacroPercent"></td>
+                    <td id="carbsMacroPercent"></td>
+                    <td id="fatMacroPercent"></td>
+                </tr>
+            </table>
+        </div>  <!-- End Macro Results Table  -->
+
+        <!-- Begin food allergies  -->
+        <div class="text-center form-group mt-5">
+            <h5>Select Food Allergies</h5>
+            <select multiple class="form-control mx-auto w-100" id="foodAllergies" style="max-width: 380px;">
+                <option>Gluten</option>
+                <option>Dairy</option>
+                <option>Nuts</option>
+                <option>Fish</option>
+                <option>Soy</option>
+            </select>
+        </div>  <!--  End food allergies -->
 
     </div>
 

@@ -1,11 +1,14 @@
 
-// Macro calculator document elements
+// Macro results/calculator elements
 const tdeeInput = document.getElementById("tdeeInput");
 const macroResultsTable = document.getElementById("macroResultsTable");
 const caloriesResult = document.getElementById("caloriesMacro");
 const proteinResult = document.getElementById("proteinMacro");
 const carbsResult = document.getElementById("carbsMacro");
 const fatResult = document.getElementById("fatMacro");
+const proteinResultPercent = document.getElementById("proteinMacroPercent");
+const carbsResultPercent = document.getElementById("carbsMacroPercent");
+const fatResultPercent = document.getElementById("fatMacroPercent");
 // Tdee calculator (mogal) elements
 const calculateTdeeBtn = document.getElementById("calculateTdeeBtn");
 const tdeeUnits = document.getElementById("unitTypes");
@@ -14,6 +17,9 @@ const unitMetric = document.getElementById("unitMetric");
 const weight = document.getElementById("weight");
 const heightUnit1 = document.getElementById("height");
 const heightUnit2 = document.getElementById("height2");
+// Diet type element(s)
+const dietTypeButtons = document.getElementById("dietTypes");
+let userDiet;
 
 // Changeable macros for calculations
 let tdee;
@@ -23,6 +29,7 @@ let fatMacroPercent = 0.2;
 
 /* ===== Event Handlers ===== */
 
+// Changes form units
 tdeeUnits.addEventListener("click", (e) => {
     if (e.target === unitMetric) {
         weight.placeholder = "kg";
@@ -94,9 +101,44 @@ calculateTdeeBtn.addEventListener("click", (e) => {
     }
     tdee = Math.floor(tdeeCalc);
     tdeeInput.value = "" + tdee + "";
-    calcMacros(tdee);
-    $('#tdeeCalculator').modal('hide');
-});
+    if (macroResultsTable.style.display !== "none") {
+        calcMacros(tdee);
+    }
+    $('#tdeeCalculator').modal('hide');  // End of total daily energy expenditure calculator
+})
+
+// Determine user's diet type and calculate macros
+dietTypeButtons.addEventListener("click", (e) => {
+    if (e.target.id === "anythingBtn") {
+        proteinMacroPercent = .25;
+        carbMacroPercent = .5;
+        fatMacroPercent = .25;
+        userDiet = "vegan";
+    } else if (e.target.id === "veganBtn") {
+        proteinMacroPercent = .25;
+        carbMacroPercent = .45;
+        fatMacroPercent = .3;
+        userDiet = "vegan";
+    } else if (e.target.id === "ketoBtn") {
+        proteinMacroPercent = .25;
+        carbMacroPercent = .05;
+        fatMacroPercent = .7;
+        userDiet = "keto";
+    } else if (e.target.id === "paleoBtn") {
+        proteinMacroPercent = .15;
+        carbMacroPercent = .2;
+        fatMacroPercent = .65;
+        userDiet = "paleo";
+    } else if (e.target.id === "vegetarianBtn") {
+        proteinMacroPercent = .25;
+        carbMacroPercent = .45;
+        fatMacroPercent = .3;
+        userDiet = "vegetarian";
+    }
+    if (tdeeInput.value !== "") {
+        calcMacros(tdee);
+    }
+})
 
 /* ===== Event Functions ===== */
 
@@ -116,8 +158,11 @@ function calcMacros(tdee) {
 function returnMacroResults(cal, protein, carbs, fat) {
     caloriesResult.textContent = cal;
     proteinResult.textContent = protein + " grams";
+    proteinResultPercent.textContent = (proteinMacroPercent * 100) + "%";
     carbsResult.textContent = carbs + " grams";
+    carbsResultPercent.textContent = (carbMacroPercent * 100) + "%";
     fatResult.textContent = fat + " grams";
+    fatResultPercent.textContent = (fatMacroPercent * 100) + "%";
 
     macroResultsTable.removeAttribute("style");
 }
